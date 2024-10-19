@@ -1,5 +1,3 @@
-//registration form
-
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
@@ -58,6 +56,11 @@ const RegistrationForm = () => {
 
       setSuccess(response.data.message);
       setError('');
+
+      // Store PRN, Name, and Resume in localStorage
+      localStorage.setItem('userPRN', formData.prn);
+      localStorage.setItem('userName', formData.name);
+      localStorage.setItem('resumeFileName', formData.resumeFile.name); // Store just the file name, you can't store the actual file in localStorage
 
       // Redirect to the dashboard after a short delay
       setTimeout(() => {
