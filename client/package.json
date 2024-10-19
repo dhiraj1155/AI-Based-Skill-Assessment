@@ -1,8 +1,8 @@
 {
   "name": "ai-based-skill-assessment",
   "private": true,
-  "version": "0.0.0",
   "type": "module",
+  "version": "0.0.0",
   "scripts": {
     "dev": "vite",
     "build": "vite build",
@@ -19,6 +19,7 @@
   },
   "devDependencies": {
     "@eslint/js": "^9.9.0",
+    "@types/multer": "^1.4.12",
     "@types/react": "^18.3.3",
     "@types/react-dom": "^18.3.0",
     "@vitejs/plugin-react": "^4.3.1",

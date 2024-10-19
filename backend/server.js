@@ -1,31 +1,22 @@
-//server.js
+// server.js
 
-const express = require('express');
-const mongoose = require('mongoose');
-const cors = require('cors');
-require('dotenv').config();
-const studentRoutes = require('./routes/register');
+import express from 'express';
+import cors from 'cors';
+import { registerRoute } from '../backend/routes/register.js'; // Import the registration route
 
 const app = express();
+app.use(express.json()); // For parsing application/json
+app.use(cors()); // Enable CORS for all routes
 
-// Middleware
-app.use(cors());
-app.use(express.json());
-
-// MongoDB Connection
-mongoose.connect('mongodb://localhost:27017/SkillAssessment', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-}).then(() => console.log('MongoDB Connected'))
-  .catch(err => console.log(err));
-
-// Use the route file
-app.use('/api', studentRoutes);
-
-// Sample Route
-app.get('/', (req, res) => {
-  res.send('Backend is running');
+// Set COOP and CORP Headers to avoid blocking issues
+app.use((req, res, next) => {
+  res.setHeader('Cross-Origin-Opener-Policy', 'same-origin');
+  res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
+  next();
 });
+
+// Use the registration route
+app.use('/api', registerRoute);
 
 // Start the server
 const PORT = process.env.PORT || 5000;
