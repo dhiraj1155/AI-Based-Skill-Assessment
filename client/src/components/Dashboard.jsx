@@ -1,6 +1,7 @@
-// Dashboard.js
+// Dashboard.jsx
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
 
 const Dashboard = () => {
   const navigate = useNavigate();
@@ -17,8 +18,9 @@ const Dashboard = () => {
 
   return (
     <div>
+      <Navbar onProfileClick={handleProfileClick} /> {/* Pass the function to Navbar */}
       <h1>Hello, Welcome to the Dashboard!</h1>
-      <button onClick={handleProfileClick}>Profile</button>
+      
     </div>
   );
 };
