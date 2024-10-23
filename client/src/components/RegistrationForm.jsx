@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom'; // Import useNavigate for redirection
+import 'bootstrap/dist/css/bootstrap.min.css'; // Import Bootstrap CSS
+import { FaUser, FaUniversity, FaFileUpload } from 'react-icons/fa'; // Importing icons
 
 const RegistrationForm = () => {
   const [formData, setFormData] = useState({
@@ -60,7 +62,7 @@ const RegistrationForm = () => {
       // Store PRN, Name, and Resume in localStorage
       localStorage.setItem('userPRN', formData.prn);
       localStorage.setItem('userName', formData.name);
-      localStorage.setItem('resumeFileName', formData.resumeFile.name); // Store just the file name, you can't store the actual file in localStorage
+      localStorage.setItem('resumeFileName', formData.resumeFile.name); // Store just the file name
 
       // Redirect to the dashboard after a short delay
       setTimeout(() => {
@@ -75,65 +77,103 @@ const RegistrationForm = () => {
   };
 
   return (
-    <div className="registration-form">
-      <h2>Complete Your Registration</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {success && <p style={{ color: 'green' }}>{success}</p>}
-      <form onSubmit={handleSubmit}>
-        <div>
-          <label>PRN:</label>
-          <input
-            type="text"
-            name="prn"
-            value={formData.prn}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Name:</label>
-          <input
-            type="text"
-            name="name"
-            value={formData.name}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>College:</label>
-          <input
-            type="text"
-            name="college"
-            value={formData.college}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Department:</label>
-          <input
-            type="text"
-            name="department"
-            value={formData.department}
-            onChange={handleChange}
-            required
-          />
-        </div>
-        <div>
-          <label>Resume:</label>
-          <input
-            type="file"
-            name="resumeFile"
-            onChange={handleFileChange}
-            accept=".pdf, .doc, .docx"
-            required
-          />
-        </div>
-        <button type="submit" disabled={loading}>
-          {loading ? 'Submitting...' : 'Register'}
-        </button>
-      </form>
+    <div className="container mt-5 d-flex justify-content-center align-items-center" style={{ minHeight: '100vh' }}>
+      <div className="border p-4 rounded shadow" style={{ maxWidth: '500px', width: '100%' }}>
+        <h2 className="text-center">Complete Your Registration</h2>
+        {error && <p className="text-danger">{error}</p>}
+        {success && <p className="text-success">{success}</p>}
+        <form onSubmit={handleSubmit} className="mx-auto">
+          <div className="mb-3">
+            <label htmlFor="prn" className="form-label">
+              <FaUser /> PRN:
+            </label>
+            <input
+              type="text"
+              name="prn"
+              id="prn"
+              className="form-control"
+              value={formData.prn}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="name" className="form-label">
+              <FaUser /> Name:
+            </label>
+            <input
+              type="text"
+              name="name"
+              id="name"
+              className="form-control"
+              value={formData.name}
+              onChange={handleChange}
+              required
+            />
+          </div>
+          <div className="mb-3">
+            <label htmlFor="college" className="form-label">
+              <FaUniversity /> College:
+            </label>
+            <select
+              name="college"
+              id="college"
+              className="form-select"
+              value={formData.college}
+              onChange={handleChange}
+              required
+            >
+              <option value="" disabled>Select College</option>
+              <option value="Vishwakarma Institute of Technology (Bibwewadi)">Vishwakarma Institute of Technology (Bibwewadi)</option>
+              <option value="Vishwakarma Institute of Technology (Kondhwa)">Vishwakarma Institute of Technology (Kondhwa)</option>
+            </select>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="department" className="form-label">
+              Department:
+            </label>
+            <select
+              name="department"
+              id="department"
+              className="form-select"
+              value={formData.department}
+              onChange={handleChange}
+              required
+            >
+              <option value="" disabled>Select Department</option>
+              <option value="Computer Engineering">Computer Engineering</option>
+              <option value="Information Technology">Information Technology</option>
+              <option value="Computer Science & Engineering (Artificial Intelligence & Machine Learning)">Computer Science & Engineering (Artificial Intelligence & Machine Learning)</option>
+              <option value="Computer Science & Engineering (Artificial Intelligence)">Computer Science & Engineering (Artificial Intelligence)</option>
+              <option value="Artificial Intelligence & Data Science">Artificial Intelligence & Data Science</option>
+              <option value="Computer Engineering (Software Engineering)">Computer Engineering (Software Engineering)</option>
+              <option value="Computer Science & Engineering (Data Science)">Computer Science & Engineering (Data Science)</option>
+              <option value="Computer Science & Engineering (Internet of Things & Cyber Security including Block Chain Technology)">Computer Science & Engineering (Internet of Things & Cyber Security including Block Chain Technology)</option>
+              <option value="Civil Engineering">Civil Engineering</option>
+              <option value="Electronics & Tele Communication Engineering">Electronics & Tele Communication Engineering</option>
+              <option value="Instrumentation & Control Engineering">Instrumentation & Control Engineering</option>
+              <option value="Mechanical Engineering">Mechanical Engineering</option>
+            </select>
+          </div>
+          <div className="mb-3">
+            <label htmlFor="resumeFile" className="form-label">
+              <FaFileUpload /> Resume:
+            </label>
+            <input
+              type="file"
+              name="resumeFile"
+              id="resumeFile"
+              className="form-control"
+              onChange={handleFileChange}
+              accept=".pdf, .doc, .docx"
+              required
+            />
+          </div>
+          <button type="submit" className="btn btn-primary w-100" disabled={loading}>
+            {loading ? 'Submitting...' : 'Register'}
+          </button>
+        </form>
+      </div>
     </div>
   );
 };
