@@ -1,14 +1,15 @@
 // Navbar.jsx
 import React from 'react';
 import { Navbar as BootstrapNavbar, Nav, Form, FormControl, Button, Container } from 'react-bootstrap';
+import { Link } from 'react-router-dom'; // Import Link from react-router-dom
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Navbar = ({ onProfileClick }) => {
   return (
     <BootstrapNavbar bg="light" expand="lg">
       <Container fluid>
-        {/* Navbar Brand: Home */}
-        <BootstrapNavbar.Brand href="#">Home</BootstrapNavbar.Brand>
+        {/* Navbar Brand: Home with Link to Dashboard */}
+        <BootstrapNavbar.Brand as={Link} to="/dashboard">Home</BootstrapNavbar.Brand>
         
         {/* Toggler for mobile view */}
         <BootstrapNavbar.Toggle aria-controls="navbarScroll" />

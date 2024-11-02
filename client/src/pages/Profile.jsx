@@ -2,6 +2,7 @@ import React, { useEffect, useState } from 'react';
 import { db } from '../firebase'; // Ensure the correct path to firebase
 import { collection, query, where, getDocs } from 'firebase/firestore';
 import { Container, Row, Col, Button, Table, Badge, Spinner } from 'react-bootstrap';
+import Navbar from '../components/Navbar';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 const Profile = () => {
@@ -54,6 +55,7 @@ const Profile = () => {
 
   return (
     <Container>
+      <Navbar/>
       {loading ? (
         <div className="text-center">
           <Spinner animation="border" />
