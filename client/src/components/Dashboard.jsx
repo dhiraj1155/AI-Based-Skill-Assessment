@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { db } from '../firebase'; // Ensure the correct import path for firebase
+import { collection, query, where, getDocs } from 'firebase/firestore';
 import Navbar from './Navbar';
 import LeftPane from './LeftPane';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -7,6 +9,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 const Dashboard = () => {
   const navigate = useNavigate();
   const [isCollapsed, setIsCollapsed] = useState(false); // State for LeftPane collapse
+  const [username, setUsername] = useState(''); // State to store the username
+  const [loading, setLoading] = useState(true); // Loading state for data fetch
+  const [error, setError] = useState(null); // Error state for data fetch
 
   const handleProfileClick = () => {
     const userPrn = localStorage.getItem('userPRN'); // Retrieve PRN from localStorage
@@ -21,6 +26,34 @@ const Dashboard = () => {
   const toggleLeftPane = () => {
     setIsCollapsed(!isCollapsed);
   };
+
+  // Fetch user data from Firestore based on PRN
+  const fetchUserData = async () => {
+    const userPrn = localStorage.getItem('userPRN');
+    if (userPrn) {
+      try {
+        const studentRef = collection(db, 'students');
+        const q = query(studentRef, where('prn', '==', userPrn));
+        const querySnapshot = await getDocs(q);
+
+        if (!querySnapshot.empty) {
+          const studentData = querySnapshot.docs[0].data();
+          setUsername(studentData.name); // Set the username from Firebase
+        } else {
+          setError('User not found.');
+        }
+      } catch (error) {
+        setError('Error fetching user data.');
+      } finally {
+        setLoading(false);
+      }
+    }
+  };
+
+  // Fetch user data on component mount
+  useEffect(() => {
+    fetchUserData();
+  }, []);
 
   // Example course suggestions (replace with dynamic data if needed)
   const courseSuggestions = [
@@ -62,7 +95,13 @@ const Dashboard = () => {
             transition: 'margin-left 0.3s ease',
           }}
         >
-          <h1>Welcome "Username"!</h1>
+          {loading ? (
+            <h2>Loading...</h2>
+          ) : error ? (
+            <p className="text-danger">{error}</p>
+          ) : (
+            <h1>Welcome, {username || 'User'}!</h1>
+          )}
 
           {/* Course Suggestions Section */}
           <div

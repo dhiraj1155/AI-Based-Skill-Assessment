@@ -35,13 +35,17 @@ const Profile = () => {
 
       if (!querySnapshot.empty) {
         const studentData = querySnapshot.docs[0].data();
+
+        // Construct the resume file URL dynamically based on prn
+        const resumeFileUrl = `https://firebasestorage.googleapis.com/v0/b/ai-based-skill-assessment.appspot.com/o/resumes%2F${studentData.prn}%2Fresume.pdf?alt=media`;
+
         setProfileData({
           prn: studentData.prn,
           name: studentData.name,
           college: studentData.college,
           department: studentData.department,
           email: studentData.email,
-          resumeFileUrl: studentData.resumeFile,
+          resumeFileUrl: resumeFileUrl,  // Store the URL here
           skills: studentData.skills || [], // Assuming skills is an array of strings
           quizHistory: studentData.quizHistory || [], // Assuming quizHistory is an array of objects
           atsScore: studentData.atsScore || 0,
@@ -93,7 +97,7 @@ const Profile = () => {
   }, [profileData]);
 
   return (
-    <Container fluid >
+    <Container fluid>
       <Navbar />
       {loading ? (
         <div className="text-center">
@@ -205,6 +209,10 @@ const Profile = () => {
 };
 
 export default Profile;
+
+
+
+
 
 
 
