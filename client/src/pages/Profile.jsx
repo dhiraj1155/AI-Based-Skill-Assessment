@@ -93,7 +93,7 @@ const Profile = () => {
   }, [profileData]);
 
   return (
-    <Container>
+    <Container fluid >
       <Navbar />
       {loading ? (
         <div className="text-center">
@@ -107,7 +107,7 @@ const Profile = () => {
           {/* Header Section */}
           <Row className="my-4">
             <Col>
-              <h1 className="text-center">Profile</h1>
+              <h1 className="text-left">Profile</h1>
             </Col>
           </Row>
 
