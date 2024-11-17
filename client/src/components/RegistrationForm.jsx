@@ -172,6 +172,18 @@ const RegistrationForm = () => {
           <button type="submit" className="btn btn-primary w-100" disabled={loading}>
             {loading ? 'Submitting...' : 'Register'}
           </button>
+          <div className="text-center mt-3">
+  <p>
+    Already registered?{' '}
+    <span
+      style={{ color: 'blue', cursor: 'pointer', textDecoration: 'underline' }}
+      onClick={() => navigate('/verify-prn')} // Redirect to PRN verification page
+    >
+      Click here
+    </span>
+  </p>
+</div>
+
         </form>
       </div>
     </div>
