@@ -9,7 +9,7 @@ const Navbar = ({ onProfileClick }) => {
     <BootstrapNavbar bg="light" expand="lg">
       <Container fluid>
         {/* Navbar Brand: Home with Link to Dashboard */}
-        <BootstrapNavbar.Brand as={Link} to="/dashboard">Home</BootstrapNavbar.Brand>
+        <BootstrapNavbar.Brand as={Link} to="/dashboard">AI Based Skill Assessment</BootstrapNavbar.Brand>
         
         {/* Toggler for mobile view */}
         <BootstrapNavbar.Toggle aria-controls="navbarScroll" />
