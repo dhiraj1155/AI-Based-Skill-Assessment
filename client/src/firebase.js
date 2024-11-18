@@ -2,7 +2,7 @@ import { initializeApp } from "firebase/app";
 import { getAuth, GoogleAuthProvider, signInWithPopup } from "firebase/auth";
 import { getFirestore } from "firebase/firestore";
 import {getStorage} from "firebase/storage"
-import conf from "../conf/conf.js";
+import conf from "../conf/conf";
 
 const firebaseConfig = {
   apiKey: conf.apiKey,

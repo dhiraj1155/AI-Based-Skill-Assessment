@@ -3,8 +3,8 @@
 import express from 'express';
 import cors from 'cors';
 import { registerRoute } from './routes/register.js'; // Import the registration route
-import { extractSkillsRoute } from './routes/skill_extraction_endpoint.js';
 import {authRoutes} from './routes/authRoutes.js'
+import { SkillExtractionRoute } from './routes/SkillExtractionRoute.js';
 
 const app = express();
 app.use(express.json()); // For parsing application/json
@@ -28,7 +28,7 @@ app.use((req, res, next) => {
 
 // Use the registration route
 app.use('/api', registerRoute);
-app.use('/api', extractSkillsRoute);
+app.use('/api', SkillExtractionRoute);
 app.use('/api', authRoutes); // Add PRN verification route
 
 
