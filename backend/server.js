@@ -17,16 +17,7 @@ app.use((req, res, next) => {
   next();
 });
 
-// const __filename = fileURLToPath(import.meta.url);
-// const __dirname = path.dirname(__filename);
 
-// app.get('/skills', (req, res) => {
-//   const filePath = path.resolve(__dirname, './client/public/extracted_skills.json'); // Adjust path as needed
-//   res.sendFile(filePath);
-// });
-
-
-// Use the registration route
 app.use('/api', registerRoute);
 app.use('/api', SkillExtractionRoute);
 app.use('/api', authRoutes); // Add PRN verification route
