@@ -1,9 +1,10 @@
-import React, { useState } from 'react';
+// LeftPane.jsx
+import React from 'react';
 import { FaTrophy, FaQuestionCircle, FaChevronLeft, FaChevronRight } from 'react-icons/fa';
 import { ListGroup } from 'react-bootstrap';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
-const LeftPane = ({ isCollapsed, toggleCollapse }) => {
+const LeftPane = ({ isCollapsed, toggleCollapse, onMenuClick }) => {
   return (
     <div
       style={{
@@ -35,11 +36,11 @@ const LeftPane = ({ isCollapsed, toggleCollapse }) => {
 
       {/* Menu Items */}
       <ListGroup variant="flush">
-        <ListGroup.Item action>
+        <ListGroup.Item action onClick={() => onMenuClick('leaderboard')}>
           <FaTrophy className="me-2" />
           {!isCollapsed && 'Leaderboard'}
         </ListGroup.Item>
-        <ListGroup.Item action>
+        <ListGroup.Item action onClick={() => onMenuClick('quiz')}>
           <FaQuestionCircle className="me-2" />
           {!isCollapsed && 'Quiz'}
         </ListGroup.Item>

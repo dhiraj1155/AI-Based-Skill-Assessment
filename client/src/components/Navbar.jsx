@@ -13,10 +13,6 @@ const Navbar = ({ onProfileClick }) => {
     try {
       // Sign out the user from Firebase
       await signOut(auth);
-
-      // Clear localStorage or sessionStorage if any
-      // localStorage.removeItem('userPRN'); // Adjust based on your auth data
-
       // Redirect to the homepage after logging out
       navigate('/');; // Redirect to the desired logout URL
     } catch (error) {

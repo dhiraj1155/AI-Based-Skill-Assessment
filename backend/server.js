@@ -7,7 +7,9 @@ import {authRoutes} from './routes/authRoutes.js'
 import { SkillExtractionRoute } from './routes/SkillExtractionRoute.js';
 
 const app = express();
-app.use(express.json()); // For parsing application/json
+app.use(express.json()); // Parses JSON body
+// app.use(express.static())
+app.use(express.urlencoded({ extended: true })); // Parses URL-encoded data
 app.use(cors()); // Enable CORS for all routes
 
 // Set COOP and CORP Headers to avoid blocking issues
@@ -16,6 +18,7 @@ app.use((req, res, next) => {
   res.setHeader('Cross-Origin-Resource-Policy', 'same-origin');
   next();
 });
+
 
 
 app.use('/api', registerRoute);
